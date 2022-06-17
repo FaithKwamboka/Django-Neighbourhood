@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" >
+    <div class="text-white text-center" style="margin-top:15%">
+        <h1>Welcome to Neighbourly</h1>
+        <h5>A private neighbourhood website designed just for you and your neighbours</h5>
+        <h5 style="margin-top:6%">Get Started by joining a neighbourhood today</h5>
+        <a href="{% url 'hood' %}" class="btn btn-sm btn-info mt-4">Join Hood</a>
+    </div>
+
+</div>
+{% endblock %}
