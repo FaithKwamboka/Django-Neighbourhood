@@ -1,0 +1,52 @@
+{%extends "registration/base.html"%} {% load bootstrap4 %}
+{% block content %}
+<br><br>
+<div class="container">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="box-sizing: content-box; border: solid green 2px; padding: 20px; border-radius: 15px;">
+      {% if form.errors %}
+        <p> Some Information Might be Incorrect </p>
+      {% endif %}
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <img src="https://cdn.neighbourly.co.nz/bundles/neighbourlyregistration/img/logo-green.svg?202206020808" width=250px style="margin-left:40px;">
+          <br><br>
+          <h5>Register With </h5><br>
+
+          <div style="text-align: center">
+            <button style="background-color: white;"><i class="fa-brands fa-google"></i>  Google </button>
+            <button style="background-color: lightblue;"><i class="fab fa-twitter"></i>  Twitter  </button>
+            <button style="background-color: blue;"><i class="fab fa-facebook-f"></i>  Facebook  </button>
+          </div><br>
+
+          <h5>Or with your E-mail</h5>
+          
+        </div>
+        
+        <div class="panel-body">
+
+          <form  action="/accounts/register/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+            </div>
+
+            <input type="hidden" name="next" value="{{next}}">
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+{% endblock %}
