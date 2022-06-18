@@ -18,7 +18,7 @@ def hoods(request):
     params = {
         'all_hoods': all_hoods,
     }
-    return render(request, 'all_hoods.html', params)
+    return render(request, 'all.html', params)
 
 
 def create_hood(request):
@@ -31,7 +31,7 @@ def create_hood(request):
             return redirect('hood')
     else:
         form = NeighbourHoodForm()
-    return render(request, 'newhood.html', {'form': form})
+    return render(request, 'new_hood.html', {'form': form})
 
 
 def single_hood(request, hood_id):
@@ -46,7 +46,7 @@ def single_hood(request, hood_id):
             b_form.neighbourhood = hood
             b_form.user = request.user.profile
             b_form.save()
-            return redirect('single-hood', hood.id)
+            return redirect('single_hood', hood.id)
     else:
         form = BusinessForm()
     params = {
@@ -56,4 +56,9 @@ def single_hood(request, hood_id):
         'posts': posts
     }
     return render(request, 'single_hood.html', params)
+
+def hood_members(request, hood_id):
+    hood = NeighbourHood.objects.get(id=hood_id)
+    members = Profile.objects.filter(neighbourhood=hood)
+    return render(request, 'members.html', {'members': members})
 
