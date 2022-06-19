@@ -1,7 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from .models import Profile, NeighbourHood, Business, Post
+from .models import *
 from pyuploadcare.dj.forms import ImageField
 
 class UpdateProfileForm(forms.ModelForm):
@@ -17,6 +15,7 @@ class NeighbourHoodForm(forms.ModelForm):
 
 
 class BusinessForm(forms.ModelForm):
+    
     class Meta:
         model = Business
         exclude = ('user', 'neighbourhood')
