@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 def index(request):
     return render(request, 'index.html')
 
-
+@login_required(login_url='/accounts/login')
 def hoods(request):
     all_hoods = NeighbourHood.objects.all()
     all_hoods = all_hoods[::-1]
@@ -20,7 +20,7 @@ def hoods(request):
     }
     return render(request, 'all.html', params)
 
-
+@login_required(login_url='/accounts/login')
 def create_hood(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
@@ -33,7 +33,7 @@ def create_hood(request):
         form = NeighbourHoodForm()
     return render(request, 'new_hood.html', {'form': form})
 
-
+@login_required(login_url='/accounts/login')
 def single_hood(request, hood_id):
     hood = NeighbourHood.objects.get(id=hood_id)
     business = Business.objects.filter(neighbourhood=hood)
@@ -78,7 +78,7 @@ def leave_hood(request, id):
 def profile(request, username):
     return render(request, 'profile.html')
 
-
+@login_required(login_url='/accounts/login')
 def edit_profile(request, username):
     user = User.objects.get(username=username)
     if request.method == 'POST':
@@ -90,7 +90,7 @@ def edit_profile(request, username):
         form = UpdateProfileForm(instance=request.user.profile)
     return render(request, 'edit_profile.html', {'form': form})
 
-
+@login_required(login_url='/accounts/login')
 def create_post(request, hood_id):
     hood = NeighbourHood.objects.get(id=hood_id)
     if request.method == 'POST':
@@ -105,6 +105,7 @@ def create_post(request, hood_id):
         form = PostForm()
     return render(request, 'post.html', {'form': form})
 
+@login_required(login_url='/accounts/login')
 def search_business(request):
     if request.method == 'GET':
         name = request.GET.get("title")
